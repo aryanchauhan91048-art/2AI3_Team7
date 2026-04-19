@@ -7,6 +7,16 @@ The Titanic disaster is one of the most well-known shipwrecks in history. This p
 It is a binary classification problem solved using Machine Learning.
 
 ---
+TEAM MEMBERS:
+
+Lohar Vikram Gautamkumar (team lead)
+Sahil Bhandare 
+Rishu Rajkumar Singh 
+R Likhith Sai
+bonam Sai satya thansush
+Siba sankar sahu
+Shubham Gupta
+---
 
 🎯 Project Objective
 
