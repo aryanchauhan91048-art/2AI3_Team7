@@ -1,4 +1,4 @@
-print("App is starting...")
+print("Titanic App is starting...")
 
 from flask import Flask, request, render_template
 import pandas as pd
@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 app = Flask(__name__)
 
 # ==============================
-# Load & Train Model
+# Load Dataset & Train Model
 # ==============================
 df = pd.read_csv("Titanic_train.csv")
 
@@ -50,7 +50,7 @@ def home():
 @app.route("/predict", methods=["POST"])
 def predict():
     try:
-        # Get input values
+        # Get form data
         pclass = int(request.form["pclass"])
         age = float(request.form["age"])
         sibsp = int(request.form["sibsp"])
@@ -59,28 +59,28 @@ def predict():
         sex = request.form["sex"]
         embarked = request.form["embarked"]
 
-        # Encoding inputs
+        # Encoding
         sex_male = 1 if sex == "male" else 0
         embarked_Q = 1 if embarked == "Q" else 0
         embarked_S = 1 if embarked == "S" else 0
 
-        # Final input (must match training columns order)
+        # Input format (IMPORTANT ORDER)
         input_data = np.array([[pclass, age, sibsp, parch, fare,
                                 sex_male, embarked_Q, embarked_S]])
 
-        # Scale input
+        # Scale
         input_scaled = scaler.transform(input_data)
 
-        # Prediction
+        # Predict
         prediction = model.predict(input_scaled)[0]
 
-        # Convert to readable output
         result = "Survived" if prediction == 1 else "Not Survived"
 
         return render_template("index.html", prediction=result)
 
     except Exception as e:
         return render_template("index.html", prediction="Error: " + str(e))
+
 
 # ==============================
 # Run App

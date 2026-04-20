@@ -5,10 +5,8 @@
 
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Arial;
             background: linear-gradient(135deg, #667eea, #764ba2);
-            margin: 0;
-            padding: 0;
         }
 
         .container {
@@ -17,49 +15,27 @@
             background: white;
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
-        }
-
-        h1 {
             text-align: center;
-            color: #333;
-        }
-
-        label {
-            font-weight: bold;
         }
 
         input, select {
-            width: 100%;
+            width: 90%;
             padding: 8px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
+            margin: 8px;
         }
 
         button {
-            width: 100%;
             padding: 10px;
             background: #667eea;
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: #5a67d8;
         }
 
         .result {
-            margin-top: 20px;
-            text-align: center;
+            margin-top: 15px;
             font-size: 20px;
             font-weight: bold;
-            color: #444;
         }
     </style>
 </head>
@@ -67,36 +43,26 @@
 <body>
 
 <div class="container">
-    <h1>Titanic Survival Predictor</h1>
+    <h2>Titanic Survival Predictor</h2>
 
     <form action="/predict" method="post">
 
-        <label>Passenger Class:</label>
         <select name="pclass">
-            <option value="1">1 (Upper)</option>
-            <option value="2">2 (Middle)</option>
-            <option value="3">3 (Lower)</option>
+            <option value="1">1st Class</option>
+            <option value="2">2nd Class</option>
+            <option value="3">3rd Class</option>
         </select>
 
-        <label>Age:</label>
-        <input type="number" name="age" required>
+        <input type="number" name="age" placeholder="Age" required>
+        <input type="number" name="sibsp" placeholder="Siblings/Spouse" required>
+        <input type="number" name="parch" placeholder="Parents/Children" required>
+        <input type="number" name="fare" placeholder="Fare" step="0.01" required>
 
-        <label>SibSp:</label>
-        <input type="number" name="sibsp" required>
-
-        <label>Parch:</label>
-        <input type="number" name="parch" required>
-
-        <label>Fare:</label>
-        <input type="number" name="fare" step="0.01" required>
-
-        <label>Sex:</label>
         <select name="sex">
             <option value="male">Male</option>
             <option value="female">Female</option>
         </select>
 
-        <label>Embarked:</label>
         <select name="embarked">
             <option value="C">Cherbourg</option>
             <option value="Q">Queenstown</option>
@@ -108,7 +74,7 @@
 
     {% if prediction %}
     <div class="result">
-        Prediction: {{ prediction }}
+        {{ prediction }}
     </div>
     {% endif %}
 
