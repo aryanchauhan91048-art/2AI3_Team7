@@ -76,14 +76,14 @@ def predict():
 
         result = "Survived" if prediction == 1 else "Not Survived"
 
-        return render_template("index.html", prediction=result)
+        return render_template("Index.html", prediction=result)
 
     except Exception as e:
-        return render_template("index.html", prediction="Error: " + str(e))
+        return render_template("Index.html", prediction="Error: " + str(e))
 
 
 # ==============================
 # Run App
 # ==============================
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=10000)
