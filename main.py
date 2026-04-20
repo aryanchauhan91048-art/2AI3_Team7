@@ -61,3 +61,46 @@ X_train, X_test, y_train, y_test = train_test_split(
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
+
+# Step 7: Model Training
+# ==============================
+model = LogisticRegression(max_iter=1000)
+model.fit(X_train, y_train)
+
+# ==============================
+# Step 8: Prediction
+# ==============================
+y_pred = model.predict(X_test)
+
+# ==============================
+# Step 9: Evaluation
+# ==============================
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("\nConfusion Matrix:\n", confusion_matrix(y_test, y_pred))
+print("\nClassification Report:\n", classification_report(y_test, y_pred))
+
+# ==============================
+# Step 10: Predict on Test Dataset
+# ==============================
+test_array = np.array(test_df)
+test_scaled = scaler.transform(test_array)
+test_predictions = model.predict(test_scaled)
+
+# Save predictions
+output = pd.DataFrame({
+    "PassengerId": pd.read_csv("Titanic_test.csv")["PassengerId"],
+    "Survived": test_predictions
+})
+
+output.to_csv("titanic_predictions.csv", index=False)
+
+# ==============================
+# Step 11: Save Model
+# ==============================
+with open('titanic_model.pkl', 'wb') as f:
+    pickle.dump(model, f)
+
+with open('scaler.pkl', 'wb') as f:
+    pickle.dump(scaler, f)
+
+print("\nModel, scaler, and predictions saved successfully!")
